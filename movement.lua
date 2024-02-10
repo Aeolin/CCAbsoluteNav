@@ -151,7 +151,7 @@ end
 function Movement:calibrate()
     local rotation = 0
     self.position = vector.new(gps.locate(10))
-    for i=0, Direction.North, Direction.West do
+    for i=Direction.North, Direction.West, 1 do
         if turtle.detect() == false then
             turtle.forward()
             local current =  vector.new(gps.locate(10))
