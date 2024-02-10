@@ -156,17 +156,16 @@ function Movement:calibrate()
             turtle.forward()
             local current =  vector.new(gps.locate(10))
             self.direction = Direction.ofVectorDiff(self.position, current)
+            turtle.back()
+            self:rotateCCW(rotation)
+            return true
         else
             turtle.turnRight()
             rotation = rotation + 1
         end
     end
     
-    if self.direction ~= Direction.UNKNOWN then
-        turtle.back()
-        for i=rotation, 1, -1 do
-            turtle.turnLeft()
-        end
-        self.direction = (self.direction - rotation) % 4
-    end
+    self.direction = Direction.UNKNOWN
+    turtle.turnRight()
+    return false 
 end
